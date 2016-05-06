@@ -1,0 +1,8 @@
+urls:
+  home: 'https://www.google.com.sg/'
+
+search term data:
+  rididulously small number of results: 'indazito'
+
+results:
+  expected_page_title: 'Google'

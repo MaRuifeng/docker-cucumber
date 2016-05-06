@@ -1,0 +1,9 @@
+login:
+  username: "user@xx.com"
+  password: <%= File.read("#{Dir.home}/.secure/.user_ldap").gsub("\n","") %>
+
+browser: chrome
+screenshot_directory: <%= "#{Dir.home}/cucumber_results" %>
+log_directory: <%= "#{Dir.home}/cucumber_logs" %>
+
+base_url: https://www.google.com.sg/

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite failures="1" errors="0" skipped="0" tests="1" time="19.860022" name="Google Search2">
+<testcase classname="Google Search2" name="Search using data specified externally (outline example : | Google |)" time="19.860022">
+  <failure message="failed Search using data specified externally (outline example : | Google |)" type="failed">
+    <![CDATA[Scenario Outline: Search using data specified externally
+
+Example row: | Google |
+
+Message:
+]]>
+    <![CDATA[expected: <= 1
+     got:    7 (RSpec::Expectations::ExpectationNotMetError)
+./features/step_definitions/search_steps.rb:43:in `block (2 levels) in <top (required)>'
+./features/step_definitions/search_steps.rb:37:in `/^I should see at most ([\d,]+) results$/'
+features/google_search2.feature:14:in `Then I should see at most 1 results'
+features/google_search2.feature:10:in `Then I should see at most 1 results']]>
+  </failure>
+  <system-out>
+    <![CDATA[]]>
+  </system-out>
+  <system-err>
+    <![CDATA[DEPRECATION: Using `should` from rspec-expectations' old `:should` syntax without explicitly enabling the syntax is deprecated. Use the new `:expect` syntax or explicitly enable `:should` with `config.expect_with(:rspec) { |c| c.syntax = :should }` instead. Called from C:/Users/ruifengm/CucumberTutorial/MyFirstCukeTest/features/step_definitions/search_steps.rb:43:in `block (2 levels) in <top (required)>'.
+]]>
+  </system-err>
+</testcase>
+</testsuite>
