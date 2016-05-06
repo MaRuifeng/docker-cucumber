@@ -1,11 +1,11 @@
 require 'watir-webdriver'
+require 'require_all'
 require 'page-object'
 require 'page-object/page_factory'
-require 'rspec-expectations'
+require 'rspec'
 require 'data_magic'
-require 'logger'
 require 'fig_newton'
-require 'require_all'
+require 'logger'
 
 World(PageObject::PageFactory)
 

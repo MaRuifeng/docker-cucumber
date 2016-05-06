@@ -1,8 +1,7 @@
-require 'watir-webdriver'
 
 ## DIRECTORIES
-screenshot_directory = "#{FigNewton.screenshot_directory}"
-log_directory = "#{FigNewton.log_directory}"
+screenshot_directory = "#{Dir.home}/#{FigNewton.screenshot_directory}"
+log_directory = "#{Dir.home}/#{FigNewton.log_directory}"
 screenshot_directory.gsub!("/", "\\") if Selenium::WebDriver::Platform.windows?
 log_directory.gsub!("/", "\\") if Selenium::WebDriver::Platform.windows?
 Dir.mkdir screenshot_directory unless Dir.exist? screenshot_directory
@@ -15,7 +14,7 @@ client.timeout = 180 # seconds – default is 60
 
 firefox_profile = Selenium::WebDriver::Firefox::Profile.new
 firefox_profile['browser.download.folderList'] = 2 # custom location
-firefox_profile['browser.download.dir'] = download_directory
+firefox_profile['browser.download.dir'] = screenshot_directory
 firefox_profile['browser.download.panel.shown'] = false
 firefox_profile['browser.download.animateNotifications'] = false
 firefox_profile['browser.helperApps.neverAsk.saveToDisk'] = "attachment/csv, text/csv, text/plain, application/csv"
@@ -67,13 +66,13 @@ Before do |scenario|
   @browser = browser
   
   # log
-  $log = Logger.new("#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-cuke_trace.log", 10, 1024000)
+  $log = Logger.new("#{Dir.home}/#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-cuke_trace.log", 10, 1024000)
   $log.level = Logger::DEBUG
   $log.formatter = proc do |severity, datetime, progname, msg|
     "[#{datetime}]#{progname} #{severity} > #{msg}\n"
   end
   
-  $stdout_log = Logger.new("#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-stdout.log", 10, 1024000)
+  $stdout_log = Logger.new("#{Dir.home}/#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-stdout.log", 10, 1024000)
   $stdout_log.level = Logger::INFO
   $stdout_log.formatter = proc do |severity, datetime, progname, msg|
     "[#{datetime}]#{msg}\n"
@@ -81,7 +80,7 @@ Before do |scenario|
   
   def $stdout.write string
     # Monkey-patch STDOUT to make it output to the log file as well
-    string.blank? ? () : $stdout_log.info(string)
+    string.strip.empty? ? () : $stdout_log.info(string)
     super
   end
 
@@ -99,7 +98,7 @@ end
 After do |scenario|
   #capture screenshot on failure and include in report
   if scenario.failed?
-    filename = "#{FigNewton.screenshot_directory}/error_#{scenario.feature.name.gsub(/\s+/, "")}_#{scenario.name.gsub(/\s+/, "")}_#{@current_page.class}_#{Time.new.strftime("%Y-%m-%d_%H%M%S")}.png"
+    filename = "#{Dir.home}/#{FigNewton.screenshot_directory}/error_#{scenario.feature.name.gsub(/\s+/, "")}_#{scenario.name.gsub(/\s+/, "")}_#{@current_page.class}_#{Time.new.strftime("%Y-%m-%d_%H%M%S")}.png"
     @current_page.save_screenshot(filename)
     embed(filename, 'image/png')
     $log.info("Scenario failed: #{$scenario_info}. Screenshot saved to #{filename}")
