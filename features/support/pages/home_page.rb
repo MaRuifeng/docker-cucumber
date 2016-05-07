@@ -1,3 +1,5 @@
+
+
 class HomePage
 	include PageObject, Common
 	page_url FigNewton.base_url
@@ -11,3 +13,4 @@ class HomePage
 		self.search_element.respond_to?(:send_keys) ? self.search_element.send_keys(:enter) : @browser.send_keys('{ENTER}')
 	end
 end
+

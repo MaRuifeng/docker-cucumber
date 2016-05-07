@@ -3,5 +3,5 @@
 
 default:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features
 parallel:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format html --out <%="#{output_dir}/report#{ENV['TEST_ENV_NUMBER']}.html"%> --require features
-test: -r features --tags ~@wip --color --format pretty --format html -o results.html --dotcucumber features/.cucumber
-ci: -r features DISPLAY=:99.0 HEADLESS=false TRAVIS=true --tags ~@wip --format progress --format html -o results.html --format junit -o junit
+test: FIG_NEWTON_FILE=dev/default.yml -r features --tags ~@wip --color --format pretty --format html -o results.html --dotcucumber features/.cucumber
+ci: FIG_NEWTON_FILE=dev/default.yml -r features DISPLAY=:0 HEADLESS=false TRAVIS=true --tags ~@wip --format progress --format html -o results.html --format junit -o junit
