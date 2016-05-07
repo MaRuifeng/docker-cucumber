@@ -29,7 +29,7 @@ while true; do
 		source /etc/profile.d/rvm.sh
 		echo "Started RVM version: "
 		rvm -v
-		bundle exec parallel_cucumber $CUKE_DIR/features/parallel_tests/ -o "-p default"; shift ;;
+		bundle exec parallel_cucumber $CUKE_DIR/features/parallel_tests/ -o "-p parallel -t @direct_search"; shift ;;
     --)        shift ; break ;;
     *)         echo "unknown option: $1" ; exit 1 ;;
   esac
