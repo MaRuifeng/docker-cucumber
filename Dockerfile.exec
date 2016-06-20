@@ -1,0 +1,19 @@
+# Dockerfile for cucumber test execution of CC&SSD
+#
+# VERSION 0.1
+# AUTHOR  Ruifeng Ma (ruifengm@sg.ibm.com)
+
+# This file creates a container that inherits from the cucumber 
+# image built through Dockerfile.setup to execute the cucumber scripts 
+# found within, in headless mode with a virtual display provided by Xvfb that can be viewed 
+# through a VNC session.
+
+
+FROM cucumber:latest
+MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
+
+# Copy all files into the container
+COPY . /home/cobalt/cucumber
+
+# Start Xvfb, x11vnc, ssh services and run cucumber
+CMD ["/bin/bash", "/src/startup.sh"]

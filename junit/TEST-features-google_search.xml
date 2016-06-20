@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite failures="0" errors="0" skipped="0" tests="1" time="3.243713" name="Google Search">
-<testcase classname="Google Search" name="Search for NoClassDefException (outline example : | Google | 1000 |)" time="3.243713">
+<testsuite failures="0" errors="0" skipped="0" tests="1" time="4.942051" name="Google Search">
+<testcase classname="Google Search" name="Search for NoClassDefException (outline example : | Google | 1000 |)" time="4.942051">
   <system-out>
     <![CDATA[]]>
   </system-out>
