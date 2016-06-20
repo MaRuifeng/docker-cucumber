@@ -19,6 +19,9 @@ mkdir /home/cobalt/cucumber
 chown -R cobalt /home/cobalt/
 cd /src/ && sudo -u cobalt cp -rf .[a-zA-Z]* [a-zA-Z]* /home/cobalt/cucumber
 
+# Store the user's password to its home directory
+echo $COBALT_PASSWORD > /home/cobalt/userpwd.txt
+
 # Set up password for VNC connection
 mkdir ~/.vnc
 x11vnc -storepasswd cobalt ~/.vnc/passwd
@@ -27,7 +30,7 @@ x11vnc -storepasswd cobalt ~/.vnc/passwd
 su cobalt <<'EOF'
 cd
 echo $(id)
-echo $COBALT_PASSWORD > userpwd.txt
+
 # Install RVM, use RVM to install Ruby version 2.3.1, and then installed required gems
 cd /home/cobalt/cucumber
 echo "Installing RVM..."
