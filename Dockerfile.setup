@@ -45,8 +45,11 @@ RUN sed -i 's/session    required     pam_loginuid.so/#session    required     p
 # Upstart and DBus have issues inside docker. We work around in order to install firefox.
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
 
-# Installing Firefox (using version 28 to ensure compatibility with Selenium Webdriver)
-RUN apt-get install -y firefox=28.0+build2-0ubuntu2 && \
+# Installing Firefox (using version 46 to ensure compatibility with Selenium Webdriver)
+# RUN apt-get install -y firefox=28.0+build2-0ubuntu2 && \
+    # apt-mark hold firefox
+RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
+    dpkg -i firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     apt-mark hold firefox
 
 # Set locale (fix the locale warnings)
