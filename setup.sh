@@ -8,7 +8,8 @@ COBALT_PASSWORD=`pwgen -c -n -1 6`
 echo "<pwd>"User: cobalt Password: $COBALT_PASSWORD"<pwd>"
 COBALT_DOCKER_ENCRYPYTED_PASSWORD=`perl -e 'print crypt('"$COBALT_PASSWORD"', "aa"),"\n"'`
 useradd -m -d /home/cobalt -p $COBALT_DOCKER_ENCRYPYTED_PASSWORD cobalt
-sed -Ei 's/adm:x:4:/cobalt:x:4:cobalt/' /etc/group
+# sed -Ei 's/adm:x:4:/cobalt:x:4:cobalt/' /etc/group
+# sed -i '$i cobalt:x:4:cobalt/' /etc/group
 adduser cobalt sudo
 
 # Set the default shell as bash for cobalt user

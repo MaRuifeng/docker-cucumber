@@ -1,4 +1,4 @@
-# Dockerfile for cucumber test execution of CC&SSD
+# Dockerfile for cucumber test execution 
 #
 # VERSION 0.1
 # AUTHOR  Ruifeng Ma (ruifengm@sg.ibm.com)
@@ -12,8 +12,19 @@
 FROM cucumber:latest
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
+# Install Nginx server
+RUN apt-get install -y software-properties-common && \
+    apt-get update && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/* && \
+    # echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+    chown -R www-data:www-data /var/lib/nginx
+
+# Expose HTTP port
+EXPOSE 80
+
 # Copy all files into the container
 COPY . /home/cobalt/cucumber
 
 # Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/src/startup.sh"]
+CMD ["/bin/bash", "/home/cobalt/cucumber/startup.sh"]

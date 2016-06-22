@@ -1,10 +1,10 @@
-# Dockerfile for cucumber test environment setup of CC&SSD
+# Dockerfile for cucumber test environment setup
 #
 # VERSION 0.1
 # AUTHOR  Ruifeng Ma (ruifengm@sg.ibm.com)
 
 # This file creates a container of ubuntu nature that runs 
-# Xvfb, X11vnc, SSH, Firefox and Ruby services.
+# Xvfb, X11vnc, SSH, NGINX, Firefox and Ruby services.
 #
 # SSH is used to provide encrypted and remote data
 # communication between the docker container and client machines.
@@ -12,6 +12,8 @@
 # Xvfb creates a virtual display where GUI tests can be run.
 #
 # X11vnc creates a VNC session against the virtual display that can be accessed through a VNC viewer remotely.
+#
+# NGINX is used to serve the static contents of the cucumber test results through HTTP.
 
 
 FROM ubuntu:14.04
@@ -27,6 +29,15 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Installing the packages required to create a fake display (x11vnc, xvfb) and other common tools
 RUN apt-get install -y openssh-server pwgen sudo curl x11vnc xvfb
+
+# Install Nginx server
+RUN apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:nginx/stable && \
+    apt-get update && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/* && \
+    # echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+    chown -R www-data:www-data /var/lib/nginx
 
 # Fix PAM (Pluggable Authentication Modules) login issue with sshd
 RUN sed -i 's/session    required     pam_loginuid.so/#session    required     pam_loginuid.so/g' /etc/pam.d/sshd
@@ -55,6 +66,9 @@ EXPOSE 22
 
 # Expose VNC port
 EXPOSE 5900
+
+# Expose HTTP port
+EXPOSE 80
 
 # Create user, install ruby and install required gems
 RUN ["/bin/bash", "/src/setup.sh"]
