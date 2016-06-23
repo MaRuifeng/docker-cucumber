@@ -47,9 +47,9 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/i
 # Install Firefox and its dependency packages (using version 46 to ensure compatibility with Selenium Webdriver)
 # RUN apt-get install -y firefox=28.0+build2-0ubuntu2 && \
     # apt-mark hold firefox
-RUN apt-get -y install libasound2 libasound2-data libcanberra0 libdbusmenu-glib4 && \
-    libdbusmenu-gtk4 libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libogg0 && \
-    libstartup-notification0 libtdb1 libvorbis0a libvorbisfile3 libxcb-util0 && \
+RUN apt-get -y install libasound2 libasound2-data libcanberra0 libdbusmenu-glib4 \
+    libdbusmenu-gtk4 libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libogg0 \
+    libstartup-notification0 libtdb1 libvorbis0a libvorbisfile3 libxcb-util0 \
     sound-theme-freedesktop xul-ext-ubufox
 RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     dpkg -i firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
