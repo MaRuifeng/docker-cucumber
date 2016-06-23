@@ -28,13 +28,15 @@ RUN apt-get upgrade -y
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install the packages required to create a fake display (x11vnc, xvfb) and other common tools
-RUN apt-get install -y openssh-server pwgen sudo curl x11vnc xvfb
+RUN apt-get install -y openssh-server pwgen sudo curl x11vnc xvfb && \
+    apt-get clean -y
 
 # Install Nginx server
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:nginx/stable && \
     apt-get update && \
     apt-get install -y nginx && \
+    apt-get clean -y && \
     # echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
     chown -R www-data:www-data /var/lib/nginx
 
@@ -67,10 +69,12 @@ RUN apt-get -y install \
     libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 \
     libxinerama1 libxkbcommon0 libxrandr2 libxrender1 libxt6 libxtst6 \
     policykit-1 sound-theme-freedesktop systemd-services systemd-shim x11-common \
-    xul-ext-ubufox 
+    xul-ext-ubufox && \
+    apt-get clean -y
 RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     dpkg -i firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     apt-mark hold firefox && \
+    apt-get clean -y && \
     rm -f /firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb
 
 # Set locale (fix the locale warnings)
@@ -79,6 +83,7 @@ RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || :
 # Install OS package dependencies required by RVM and the cucumber scripts
 # and empty the application lists afterwards
 RUN apt-get -y install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev libpq-dev && \
+    apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* 
 
 # Copy the files into the container
