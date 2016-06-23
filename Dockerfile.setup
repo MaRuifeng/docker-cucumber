@@ -27,7 +27,7 @@ RUN apt-get upgrade -y
 # Set the env variable DEBIAN_FRONTEND to noninteractive such that no user prompts will be given during package installation process
 ENV DEBIAN_FRONTEND noninteractive
 
-# Installing the packages required to create a fake display (x11vnc, xvfb) and other common tools
+# Install the packages required to create a fake display (x11vnc, xvfb) and other common tools
 RUN apt-get install -y openssh-server pwgen sudo curl x11vnc xvfb
 
 # Install Nginx server
@@ -44,9 +44,13 @@ RUN sed -i 's/session    required     pam_loginuid.so/#session    required     p
 # Upstart and DBus have issues inside docker. We work around in order to install firefox.
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
 
-# Installing Firefox (using version 46 to ensure compatibility with Selenium Webdriver)
+# Install Firefox and its dependency packages (using version 46 to ensure compatibility with Selenium Webdriver)
 # RUN apt-get install -y firefox=28.0+build2-0ubuntu2 && \
     # apt-mark hold firefox
+RUN apt-get -y install libasound2 libasound2-data libcanberra0 libdbusmenu-glib4 && \
+    libdbusmenu-gtk4 libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libogg0 && \
+    libstartup-notification0 libtdb1 libvorbis0a libvorbisfile3 libxcb-util0 && \
+    sound-theme-freedesktop xul-ext-ubufox
 RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     dpkg -i firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     apt-mark hold firefox
@@ -54,7 +58,7 @@ RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/fire
 # Set locale (fix the locale warnings)
 RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || :
 
-# Installing OS package dependencies required by RVM and the cucumber scripts
+# Install OS package dependencies required by RVM and the cucumber scripts
 # and empty the application lists afterwards
 RUN apt-get -y install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev libpq-dev && \
     rm -rf /var/lib/apt/lists/* 
