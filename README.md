@@ -47,7 +47,7 @@ Connect to the virtual display via TigerVNC viewer (password: cobalt).
 
     <docker_host_ip>:<vnc_port_number>
     
-View the test results report in HTML, test logs and screen shots via a browser.
+Once the cucumber scripts are finished with running, view the test results report in HTML, test logs and screen shots via a browser.
 
     http://<docker_host_ip>:9080
 
