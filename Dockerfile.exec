@@ -12,17 +12,6 @@
 FROM cucumber:latest
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
-# Install Nginx server
-RUN apt-get install -y software-properties-common && \
-    apt-get update && \
-    apt-get install -y nginx && \
-    rm -rf /var/lib/apt/lists/* && \
-    # echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-    chown -R www-data:www-data /var/lib/nginx
-
-# Expose HTTP port
-EXPOSE 80
-
 # Copy all files into the container
 COPY . /home/cobalt/cucumber
 
