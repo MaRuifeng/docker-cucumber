@@ -57,7 +57,7 @@ RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || :
 # Installing OS package dependencies required by RVM and the cucumber scripts
 # and empty the application lists afterwards
 RUN apt-get -y install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev libpq-dev && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/* 
 
 # Copy the files into the container
 ADD . /src
