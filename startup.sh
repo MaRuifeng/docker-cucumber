@@ -11,7 +11,7 @@ rm -rf *
 cd 
 # create an Xvfb virtual display in the background (another screen size: 1080x1440x24)
 Xvfb :99 -ac -screen 0 1680x1080x24 &  
-sleep 5 # wait for Xvfb display server session to be ready  
+sleep 15 # wait for Xvfb display server session to be ready  
 export DISPLAY=:99
 
 ## Start a vnc session to the virtual display created above
@@ -26,8 +26,8 @@ echo $(ruby -v)
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
-bundle exec parallel_cucumber features/ -o "-p parallel"
-# cucumber -p ci features/
+# bundle exec parallel_cucumber features/ -o "-p parallel"
+cucumber -p ci features/
 EOF
 
 ## Copy cucumber html results to the default Nginx content folder
