@@ -32,9 +32,10 @@ RUN apt-get install -y openssh-server pwgen sudo curl x11vnc xvfb && \
     apt-get clean -y
 
 # Install Nginx server
-RUN apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:nginx/stable && \
-    apt-get update && \
+RUN \
+    # apt-get install -y software-properties-common && \
+    # add-apt-repository -y ppa:nginx/stable && \
+    # apt-get update && \
     apt-get install -y nginx && \
     apt-get clean -y && \
     # echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
@@ -67,7 +68,7 @@ RUN apt-get -y install \
     libv4lconvert0 libvorbis0a libvorbisfile3 libwayland-client0 \
     libwayland-cursor0 libx11-xcb1 libxcb-render0 libxcb-shm0 libxcb-util0 \
     libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 \
-    libxinerama1 libxkbcommon0 libxrandr2 libxrender1 libxt6 libxtst6 \
+    libxinerama1 libxkbcommon0 libxrandr2 libxrender1 libxt6 libxtst6 libdbus-glib-1-2 \
     policykit-1 sound-theme-freedesktop systemd-services systemd-shim x11-common \
     xul-ext-ubufox && \
     apt-get clean -y

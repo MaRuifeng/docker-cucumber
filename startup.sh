@@ -3,6 +3,10 @@
 ## Start the ssh service
 /usr/sbin/sshd
 
+## Clear the src folder
+cd /src
+rm -rf *
+
 ## Start the Xvfb virtual display service
 cd 
 # create an Xvfb virtual display in the background (another screen size: 1080x1440x24)
