@@ -12,6 +12,9 @@
 FROM cucumber:latest
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
+# Empty the cucumber project folder in the container
+RUN rm -rf /home/cobalt/cucumber/*
+
 # Copy all files into the container
 COPY . /home/cobalt/cucumber
 
