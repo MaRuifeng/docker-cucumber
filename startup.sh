@@ -26,8 +26,8 @@ echo $(ruby -v)
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
-bundle exec parallel_cucumber features/ -o "-p html_each"
-# cucumber -p ci features/
+# bundle exec parallel_cucumber features/ -o "-p html_each"
+cucumber -p html_each features/
 ruby results_XML_handler.rb
 EOF
 

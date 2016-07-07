@@ -29,7 +29,7 @@
   Date: Jul-05-2016
  -->
 
-<xsl:param name="TITLE">Cucumber BVT Report (Continuous Compliance &amp; Self Service Delivery)</xsl:param>
+<xsl:param name="TITLE">Cucumber BVT Report </xsl:param>
 <xsl:param name="LOG"><xsl:value-of select="testsuites/@logs"/></xsl:param>
 
 <!--
@@ -336,7 +336,7 @@
     <tr>
         <td align="left">Designed for JUnit. </td>
         <!--<td align="right">Designed for use with <a href='http://www.junit.org'>JUnit</a> and <a href='http://ant.apache.org/ant'>Ant</a>.</td>-->
-        <td align="right">Contact | CC&amp;SSD Testing Team <a href="mailto:ruifengm@sg.ibm.com">ruifengm@sg.ibm.com</a> &#169; 2016-July-05</td>
+        <td align="right">Contact | A code knight <a href="mailto:ruifengm@sg.ibm.com">mrfflyer@gmail.com</a> &#169; 2016-July-05</td>
     </tr>
     </table>
     <hr size="1"/>
