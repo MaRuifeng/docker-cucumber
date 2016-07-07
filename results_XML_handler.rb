@@ -10,9 +10,9 @@ require 'rexml/document'
 include REXML
 
 result_directory = "#{Dir.home}/cucumber_results"
-junit_directory = "#{Dir.result_directory}/junit"
-log_directory = "#{Dir.result_directory}/logs"
-report_directory = "#{Dir.result_directory}/reports"
+junit_directory = "#{result_directory}/junit"
+log_directory = "#{result_directory}/logs"
+report_directory = "#{result_directory}/reports"
 
 xml_all_doc = Document.new
 

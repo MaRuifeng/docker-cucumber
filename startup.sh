@@ -11,7 +11,7 @@ rm -rf *
 cd 
 # create an Xvfb virtual display in the background (another screen size: 1080x1440x24)
 Xvfb :99 -ac -screen 0 1680x1080x24 &  
-sleep 15 # wait for Xvfb display server session to be ready  
+sleep 5 # wait for Xvfb display server session to be ready  
 export DISPLAY=:99
 
 ## Start a vnc session to the virtual display created above
