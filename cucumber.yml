@@ -2,7 +2,7 @@
 <% Dir.mkdir output_dir unless Dir.exist? output_dir %>
 <% report_dir = "#{Dir.home}/cucumber_results/reports" %>
 <% Dir.mkdir report_dir unless Dir.exist? report_dir %>
-<% junit_dir = "#{Dir.home}/cucumber_results/reports/junit" %>
+<% junit_dir = "#{Dir.home}/cucumber_results/junit" %>
 <% Dir.mkdir junit_dir unless Dir.exist? junit_dir %>
 
 default:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features --format junit -o <%="#{output_dir}/junit"%>
