@@ -10,9 +10,9 @@ require 'rexml/document'
 include REXML
 
 result_directory = "#{Dir.home}/cucumber_results"
-junit_directory = "#{Dir.home}/cucumber_results/junit"
-log_directory = "#{Dir.home}/cucumber_results/logs"
-report_directory = "#{Dir.home}/cucumber_results/reports"
+junit_directory = "#{Dir.result_directory}/junit"
+log_directory = "#{Dir.result_directory}/logs"
+report_directory = "#{Dir.result_directory}/reports"
 
 xml_all_doc = Document.new
 
@@ -22,7 +22,7 @@ xml_all_doc << XMLDecl.new
 # Add element tree
 testsuites = Element.new "testsuites"
 testsuite_id = 0
-testsuites.add_attribute("logs", log_directory + "/")
+testsuites.add_attribute("logs", (log_directory + "/").gsub("#{Dir.home}", ""))
 Dir["#{junit_directory}/TEST-*.xml"].each do |file_path|
     xml_file = File.new(file_path)
 	xml_doc = Document.new(xml_file)
@@ -35,8 +35,7 @@ Dir["#{junit_directory}/TEST-*.xml"].each do |file_path|
 		Dir["#{log_directory}/*cuke_trace.log"].each do |file_path|
 			# if file_path =~ Regexp.new(feature_name.gsub(/\s+/, "-"), Regexp::IGNORECASE)
 			if file_path.split("/")[-1].gsub("-cuke_trace.log", "") == feature_name.gsub(/\s+/, "-")
-
-				log_link = file_path
+				log_link = file_path.gsub("#{Dir.home}", "")
 				break
 			end
 		end
@@ -45,7 +44,7 @@ Dir["#{junit_directory}/TEST-*.xml"].each do |file_path|
 		Dir["#{report_directory}/*.html"].each do |file_path|
 			# if file_path =~ Regexp.new(feature_name.gsub(/\s+/, "-"), Regexp::IGNORECASE)
 			if file_path.split("/")[-1].gsub(".html", "") == feature_name.gsub(/\s+/, "-")
-				report_link = file_path
+				report_link = file_path.gsub("#{Dir.home}", "")
 				break
 			end
 		end
