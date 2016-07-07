@@ -9,7 +9,7 @@
 # through a VNC session.
 
 
-FROM cucumber:latest
+FROM docker_cucumber:latest
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
 # Empty the cucumber project folder in the container
