@@ -26,8 +26,9 @@ echo $(ruby -v)
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
-# bundle exec parallel_cucumber features/ -o "-p parallel"
-cucumber -p ci features/
+bundle exec parallel_cucumber features/ -o "-p html_each"
+# cucumber -p ci features/
+ruby results_XML_handler.rb
 EOF
 
 ## Copy cucumber html results to the default Nginx content folder
