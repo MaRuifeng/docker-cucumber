@@ -1,8 +1,8 @@
 <% output_dir = "#{Dir.home}/#{ENV['APP_BUILD']}/#{ENV['TEST_PHASE']}/cucumber-result" %>
 <% Dir.mkdir output_dir unless Dir.exist? output_dir %>
-<% report_dir = "#{output}/cuke-report" %>
+<% report_dir = "#{output_dir}/cuke-report" %>
 <% Dir.mkdir report_dir unless Dir.exist? report_dir %>
-<% junit_dir = "#{output}/junit" %>
+<% junit_dir = "#{output_dir}/junit" %>
 <% Dir.mkdir junit_dir unless Dir.exist? junit_dir %>
 
 default:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features --format junit -o <%="#{output_dir}/junit"%>
