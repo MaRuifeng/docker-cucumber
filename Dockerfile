@@ -19,14 +19,6 @@
 FROM ubuntu:14.04
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
-# Pass application build name as a docker build argument
-ARG APP_BUILD
-ARG TEST_PHASE
-
-# Check if the build argument has been set
-RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
-RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
-
 # Ensure the package repository is up to date
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update -y
@@ -113,5 +105,18 @@ EXPOSE 80
 # Create user, install ruby and required gems
 RUN ["/bin/bash", "/src/setup.sh"]
 
-# Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/src/startup.sh", "$APP_BUILD", "$TEST_PHASE"]
+# Pass application build name as a docker build argument
+ARG APP_BUILD
+ARG TEST_PHASE
+
+# Check if the build argument has been set
+RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
+RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
+
+# Transfer args as env vars
+ENV APP_BUILD ${APP_BUILD}
+ENV TEST_PHASE ${TEST_PHASE}
+
+# Start Xvfb, x11vnc, ssh services and run cucumber (using CMD shell form to parse the env vars)
+# CMD ["/bin/bash", "/src/startup.sh", "$APP_BUILD", "$TEST_PHASE"]
+CMD /bin/bash /src/startup.sh $APP_BUILD $TEST_PHASE

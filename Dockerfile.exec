@@ -23,8 +23,13 @@ ARG TEST_PHASE
 RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
 RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
 
+# Transfer args as env vars
+ENV APP_BUILD ${APP_BUILD}
+ENV TEST_PHASE ${TEST_PHASE}
+
 # Copy all files into the container
 COPY . /home/cobalt/cucumber
 
 # Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/home/cobalt/cucumber/startup.sh", "$APP_BUILD", "$TEST_PHASE"]
+# CMD ["/bin/bash", "/home/cobalt/cucumber/startup.sh", "$APP_BUILD", "$TEST_PHASE"]
+CMD /bin/bash /home/cobalt/cucumber/startup.sh $APP_BUILD $TEST_PHASE
