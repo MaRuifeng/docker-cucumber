@@ -200,7 +200,7 @@
                     <xsl:with-param name="value" select="$timeCount"/>
                 </xsl:call-template>
             </td>
-            <td><a href="/{$logsLink}" target="_blank">Logs</a></td>
+            <td><a href="{$logsLink}" target="_blank">Logs</a></td>
         </tr>
         </table>
         <table border="0" width="95%">
@@ -262,11 +262,11 @@
                     </xsl:call-template>
                     </td>
                     <!--td><xsl:value-of select="$testsuites-in-package/@timestamp"/></td-->
-                    <td><a href="/{$cukeLink}" target="_blank">cuke-report.html</a></td>
+                    <td><a href="{$cukeLink}" target="_blank">cuke-report.html</a></td>
                     <td><a href="{$defectLink}" target="_blank"><xsl:value-of select="$defectNum"/></a></td>
                     <td><xsl:value-of select="$defectStatus"/></td>
                     <td><xsl:value-of select="$owner"/></td>
-                    <td><a href="/{$logLink}" target="_blank">cuke-trace.log</a></td>
+                    <td><a href="{$logLink}" target="_blank">cuke-trace.log</a></td>
                     <td><xsl:value-of select="$testsuites-in-package/properties/property[@name='test_env']/@value"/></td>
                    </tr>
             </xsl:for-each>
@@ -433,7 +433,7 @@
                 <td></td>
             </xsl:otherwise>
         </xsl:choose>
-        <td><a href="/{$LOG}" target="_blank">Logs</a></td>
+        <td><a href="{$LOG}" target="_blank">Logs</a></td>
         <td>
             <xsl:call-template name="display-time">
                 <xsl:with-param name="value" select="@time"/>
