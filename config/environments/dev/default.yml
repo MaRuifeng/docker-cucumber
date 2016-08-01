@@ -3,7 +3,7 @@ login:
   password: <%= File.read("#{Dir.home}/.secure/.user_ldap").gsub("\n","") %>
 
 browser: firefox
-screenshot_directory: cucumber_results/screenshots
-log_directory: cucumber_results/logs
+screenshot_directory: cucumber-result/screenshots
+log_directory: cucumber-result/logs
 
 base_url: https://www.google.com.sg/

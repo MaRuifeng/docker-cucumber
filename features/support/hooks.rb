@@ -1,7 +1,9 @@
 
 ## DIRECTORIES
-screenshot_directory = "#{Dir.home}/#{FigNewton.screenshot_directory}"
-log_directory = "#{Dir.home}/#{FigNewton.log_directory}"
+# screenshot_directory = "#{Dir.home}/#{FigNewton.screenshot_directory}"
+# log_directory = "#{Dir.home}/#{FigNewton.log_directory}"
+screenshot_directory = "#{Dir.home}/#{ENV['APP_BUILD']}/#{ENV['TEST_PHASE']}/#{FigNewton.screenshot_directory}"
+log_directory = "#{Dir.home}/#{ENV['APP_BUILD']}/#{ENV['TEST_PHASE']}/#{FigNewton.log_directory}"
 screenshot_directory.gsub!("/", "\\") if Selenium::WebDriver::Platform.windows?
 log_directory.gsub!("/", "\\") if Selenium::WebDriver::Platform.windows?
 Dir.mkdir screenshot_directory unless Dir.exist? screenshot_directory

@@ -26,11 +26,11 @@ echo $(ruby -v)
 
 mkdir $APP_BUILD
 mkdir $APP_BUILD/$TEST_PHASE
-mkdir $APP_BUILD/$TEST_PHASE/cucumber
-mkdir $APP_BUILD/$TEST_PHASE/cucumber/logs
-mkdir $APP_BUILD/$TEST_PHASE/cucumber/screenshots
-mkdir $APP_BUILD/$TEST_PHASE/cucumber/cuke_reports
-mkdir $APP_BUILD/$TEST_PHASE/cucumber/junit
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/logs
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/screenshots
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/cuke-report
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/junit
 
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
