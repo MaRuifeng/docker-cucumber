@@ -68,13 +68,13 @@ Before do |scenario|
   @browser = browser
   
   # log
-  $log = Logger.new("#{Dir.home}/#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-cuke_trace.log", 10, 1024000)
+  $log = Logger.new("#{log_directory}/#{$feature_name.gsub(/\s+/, "-")}-cuke_trace.log", 10, 1024000)
   $log.level = Logger::DEBUG
   $log.formatter = proc do |severity, datetime, progname, msg|
     "[#{datetime}]#{progname} #{severity} > #{msg}\n"
   end
   
-  $stdout_log = Logger.new("#{Dir.home}/#{FigNewton.log_directory}/#{$feature_name.gsub(/\s+/, "-")}-stdout.log", 10, 1024000)
+  $stdout_log = Logger.new("#{log_directory}/#{$feature_name.gsub(/\s+/, "-")}-stdout.log", 10, 1024000)
   $stdout_log.level = Logger::INFO
   $stdout_log.formatter = proc do |severity, datetime, progname, msg|
     "[#{datetime}]#{msg}\n"
@@ -100,7 +100,7 @@ end
 After do |scenario|
   #capture screenshot on failure and include in report
   if scenario.failed?
-    filename = "#{Dir.home}/#{FigNewton.screenshot_directory}/error_#{scenario.feature.name.gsub(/\s+/, "")}_#{scenario.name.gsub(/\s+/, "")}_#{@current_page.class}_#{Time.new.strftime("%Y-%m-%d_%H%M%S")}.png"
+    filename = "#{screenshot_directory}/error_#{scenario.feature.name.gsub(/\s+/, "")}_#{scenario.name.gsub(/\s+/, "")}_#{@current_page.class}_#{Time.new.strftime("%Y-%m-%d_%H%M%S")}.png"
     @current_page.save_screenshot(filename)
     embed(filename, 'image/png')
     $log.info("Scenario failed: #{$scenario_info}. Screenshot saved to #{filename}")
