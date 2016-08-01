@@ -9,10 +9,10 @@ require 'rexml/document'
 
 include REXML
 
-result_directory = "#{Dir.home}/cucumber_results"
+result_directory = "#{ENV['APP_BUILD']}/#{ENV['TEST_PHASE']}/cucumber"
 junit_directory = "#{result_directory}/junit"
 log_directory = "#{result_directory}/logs"
-report_directory = "#{result_directory}/reports"
+report_directory = "#{result_directory}/cuke_reports"
 
 xml_all_doc = Document.new
 

@@ -19,6 +19,14 @@
 FROM ubuntu:14.04
 MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 
+# Pass application build name as a docker build argument
+ARG APP_BUILD
+ARG TEST_PHASE
+
+# Check if the build argument has been set
+RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
+RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
+
 # Ensure the package repository is up to date
 # RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update -y

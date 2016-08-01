@@ -15,6 +15,14 @@ MAINTAINER Ruifeng Ma "ruifengm@sg.ibm.com"
 # Empty the cucumber project folder in the container
 RUN rm -rf /home/cobalt/cucumber/*
 
+# Pass application build name as a docker build argument
+ARG APP_BUILD
+ARG TEST_PHASE
+
+# Check if the build argument has been set
+RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
+RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
+
 # Copy all files into the container
 COPY . /home/cobalt/cucumber
 

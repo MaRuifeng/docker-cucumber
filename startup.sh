@@ -23,6 +23,13 @@ su cobalt <<'EOF'
 cd
 source /home/cobalt/.rvm/scripts/rvm
 echo $(ruby -v)
+
+mkdir $APP_BUILD/$TEST_PHASE/cucumber
+mkdir $APP_BUILD/$TEST_PHASE/cucumber/logs
+mkdir $APP_BUILD/$TEST_PHASE/cucumber/screenshots
+mkdir $APP_BUILD/$TEST_PHASE/cucumber/cuke_reports
+mkdir $APP_BUILD/$TEST_PHASE/cucumber/junit
+
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
