@@ -24,6 +24,8 @@ cd
 source /home/cobalt/.rvm/scripts/rvm
 echo $(ruby -v)
 
+mkdir $APP_BUILD
+mkdir $APP_BUILD/$TEST_PHASE
 mkdir $APP_BUILD/$TEST_PHASE/cucumber
 mkdir $APP_BUILD/$TEST_PHASE/cucumber/logs
 mkdir $APP_BUILD/$TEST_PHASE/cucumber/screenshots
