@@ -1,12 +1,8 @@
 #!/bin/bash
 
 # Get arguments as environment variables
-echo $1
-echo $2 
-export APP_BUILD = $1
-export TEST_PHASE = $2
-echo $APP_BUILD
-echo $TEST_PHASE
+export APP_BUILD=$1
+export TEST_PHASE=$2
 
 ## Start the ssh service
 /usr/sbin/sshd
