@@ -33,7 +33,7 @@ Usage
 -----
 Clone the repository to your git folder, build the docker image and run it. 
 
-    docker build -t cucumber -f Dockerfile.setup .
+    docker build -t cucumber -f Dockerfile.setup --build-arg APP_BUILD=build --build-arg TEST_PHASE=bvt .
     CONTAINER_ID=$(docker run -d -P -p 9080:80 cucumber)
     
 This will expose 3 ports from the container, SSH(22), VNC(5900) and TCP(80). Use below command to checkout the port numbers.
