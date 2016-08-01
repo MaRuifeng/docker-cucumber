@@ -35,10 +35,10 @@ http {
 		listen 80;
 		# root /home/cobalt/cucumber;
 		location / {
-			root /home/cobalt/cucumber_results;
+			root /home/cobalt/<%=ENV["APP_BUILD"]%>/<%=ENV["TEST_PHASE"]%>;
 		}
-		location /cucumber_results/ {
-			root /home/cobalt;
+		location /cucumber-result/ {
+			root /home/cobalt/<%=ENV["APP_BUILD"]%>/<%=ENV["TEST_PHASE"]%>;
 		}
 	}
 

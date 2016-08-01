@@ -51,5 +51,6 @@ EOF
 ## Start Nginx server
 # using global directive 'daemon off' to 
 # ensure the docker container does not halt after Nginx spawns its processes
+erb /home/cobalt/cucumber/cucumber_nginx.conf.erb > /home/cobalt/cucumber/cucumber_nginx.conf
 echo "Starting Nginx server with customized configuration..."
 /usr/sbin/nginx -g 'daemon off;' -c /home/cobalt/cucumber/cucumber_nginx.conf
