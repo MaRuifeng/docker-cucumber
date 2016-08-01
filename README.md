@@ -2,6 +2,11 @@
 
 Description
 ---------------
+This branch takes 2 input build arguments to be supplied for reporting URLs. The reporting directory is structured by these two arguments. 
+
+APP_BUILD
+
+TEST_PHASE
 
 This repository contains a Dockerfile that creates a docker container which runs Xvfb, X11VNC, SSH, NGINX, Firefox and Ruby services. 
 Cucumber GUI tests can be run inside the container with test reports exposed through NGINX static web service. 
