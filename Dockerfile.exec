@@ -27,4 +27,4 @@ RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; els
 COPY . /home/cobalt/cucumber
 
 # Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/home/cobalt/cucumber/startup.sh"]
+CMD ["/bin/bash", "/home/cobalt/cucumber/startup.sh", $APP_BUILD, $TEST_PHASE]

@@ -114,4 +114,4 @@ EXPOSE 80
 RUN ["/bin/bash", "/src/setup.sh"]
 
 # Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/src/startup.sh"]
+CMD ["/bin/bash", "/src/startup.sh", $APP_BUILD, $TEST_PHASE]
