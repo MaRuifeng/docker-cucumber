@@ -35,7 +35,7 @@ Dir["#{junit_directory}/TEST-*.xml"].each do |file_path|
 		Dir["#{log_directory}/*cuke_trace.log"].each do |file_path|
 			# if file_path =~ Regexp.new(feature_name.gsub(/\s+/, "-"), Regexp::IGNORECASE)
 			if file_path.split("/")[-1].gsub("-cuke_trace.log", "") == feature_name.gsub(/\s+/, "-")
-				log_link = file_path.gsub("#{Dir.home}", "")
+				log_link = "./" + file_path.gsub("#{Dir.home}", "")
 				break
 			end
 		end
@@ -44,7 +44,7 @@ Dir["#{junit_directory}/TEST-*.xml"].each do |file_path|
 		Dir["#{report_directory}/*.html"].each do |file_path|
 			# if file_path =~ Regexp.new(feature_name.gsub(/\s+/, "-"), Regexp::IGNORECASE)
 			if file_path.split("/")[-1].gsub(".html", "") == feature_name.gsub(/\s+/, "-")
-				report_link = file_path.gsub("#{Dir.home}", "")
+				report_link = "./" + file_path.gsub("#{Dir.home}", "")
 				break
 			end
 		end
