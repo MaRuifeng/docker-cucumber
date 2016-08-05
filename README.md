@@ -19,6 +19,10 @@ Cucumber GUI tests can be run inside the container with test reports exposed thr
 
 * NGINX is used to serve the static contents of the cucumber test results through HTTP.
 
+* A customized HTML formatter was written under the features/support folder to generate separated HTML reports for each feature. 
+
+* An XSLT file junit-noframes.xsl was written to compile the JUnit XML reports into a consolidated HTML report. 
+
 Owners
 ------
 Author: Ruifeng Ma
