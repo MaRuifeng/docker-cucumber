@@ -22,6 +22,9 @@ export DISPLAY=:99
 x11vnc -forever -usepw -display :99 &
 # -geometry 1680x1080
 
+# Grant file permission
+chown -R cobalt /home/cobalt/
+
 ## Run cucumber, report handler, and convert nginx conf file
 su cobalt <<'EOF'
 cd
@@ -39,6 +42,9 @@ mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/junit
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
+echo "Installing/updating gems in case of changes..."
+bundle install
+echo "Running cucumber..."
 # bundle exec parallel_cucumber features/ -o "-p html_each"
 cucumber -p html_each features/
 ruby results_XML_handler.rb
