@@ -6,7 +6,10 @@ require 'rspec'
 require 'data_magic'
 require 'fig_newton'
 require 'logger'
+require 'faker'
+require 'time'
 
+FigNewton.load(ENV['FIG_NEWTON_FILE'])
 World(PageObject::PageFactory)
 
 TEST_DATA_DIR = "./features/support/test_data"

@@ -1,8 +1,9 @@
 urls:
-  home: 'https://www.google.com.sg/'
+  google_home: 'https://www.google.com.sg/'
+  bin_home: 'https://www.bing.com'
 
-search term data:
-  rididulously small number of results: 'indazito'
+search_term_data:
+  ridiculously small number of results: 'indazito'
 
 results:
-  expected_page_title: 'Google'
+  expected_home_page_title: 'Google'

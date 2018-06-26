@@ -1,11 +1,12 @@
-<% output_dir = "#{Dir.home}/#{ENV['APP_BUILD']}/#{ENV['TEST_PHASE']}/cucumber-result" %>
+<% output_dir = "#{Dir.home}/cucumber-result" %>
 <% Dir.mkdir output_dir unless Dir.exist? output_dir %>
 <% report_dir = "#{output_dir}/cuke-report" %>
 <% Dir.mkdir report_dir unless Dir.exist? report_dir %>
 <% junit_dir = "#{output_dir}/junit" %>
 <% Dir.mkdir junit_dir unless Dir.exist? junit_dir %>
 
-default:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features --format junit -o <%="#{output_dir}/junit"%>
+default: FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features
+dev: FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format pretty --require features --format junit -o <%="#{output_dir}/junit"%>
 parallel:  FIG_NEWTON_FILE=dev/default.yml --no-source --no-color --format html --out <%="#{report_dir}/report#{ENV['TEST_ENV_NUMBER']}.html"%> --require features
 test: FIG_NEWTON_FILE=dev/default.yml -r features --tags ~@wip --color --format pretty --format html -o results.html --dotcucumber features/.cucumber
 ci: FIG_NEWTON_FILE=dev/default.yml -r features DISPLAY=:99 HEADLESS=false --format progress --format html -o <%="#{report_dir}/results.html"%> --format junit -o <%="#{report_dir}/junit"%>

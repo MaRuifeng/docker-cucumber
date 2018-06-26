@@ -18,5 +18,5 @@ Feature: Google Search
     @search_with_data @most_results
 	Scenario: Search using data specified externally
 		Given I am on the "Google" Home Page
-		When I search for a rididulously small number of results
-		Then I should see at most 2 results
+		When I search for a ridiculously small number of results
+		Then I should see at most 4 results
