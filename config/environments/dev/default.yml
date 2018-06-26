@@ -1,9 +1,13 @@
-login:
-  username: "user@xx.com"
-  password: <%= File.read("#{Dir.home}/.secure/.user_ldap").gsub("\n","") %>
+<% result_dir = "#{Dir.home}/cucumber-result" %>
+<% Dir.mkdir result_dir unless Dir.exist? result_dir %>
+<% log_dir = "#{result_dir}/logs" %>
+<% Dir.mkdir log_dir unless Dir.exist? log_dir %>
+<% screenshots_dir = "#{result_dir}/screenshots" %>
+<% Dir.mkdir screenshots_dir unless Dir.exist? screenshots_dir %>
+
+results_directory: <%= "#{result_dir}" %>
+log_directory: <%= "#{log_dir}" %>
+screenshot_directory: <%= "#{screenshots_dir}" %>
 
 browser: firefox
-screenshot_directory: cucumber_results/screenshots
-log_directory: cucumber_results/logs
-
 base_url: https://www.google.com.sg/

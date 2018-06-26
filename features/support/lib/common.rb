@@ -4,7 +4,7 @@ module Common
 	end 
 
 	def Common.get_search_term term 
-		YAML.load_file("#{TEST_DATA_DIR}/test_data.yml")["search term data"][term]
+		YAML.load_file("#{TEST_DATA_DIR}/test_data.yml")["search_term_data"][term]
 	end
 
 	def Common.get_result item

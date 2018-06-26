@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Get arguments as environment variables
+export APP_BUILD=$1
+export TEST_PHASE=$2
+
 ## Start the ssh service
 /usr/sbin/sshd
 
@@ -18,17 +22,33 @@ export DISPLAY=:99
 x11vnc -forever -usepw -display :99 &
 # -geometry 1680x1080
 
-## Run cucumber
+# Grant file permission
+chown -R cobalt /home/cobalt/
+
+## Run cucumber, report handler, and convert nginx conf file
 su cobalt <<'EOF'
 cd
 source /home/cobalt/.rvm/scripts/rvm
 echo $(ruby -v)
+
+mkdir $APP_BUILD
+mkdir $APP_BUILD/$TEST_PHASE
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/logs
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/screenshots
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/cuke-report
+mkdir $APP_BUILD/$TEST_PHASE/cucumber-result/junit
+
 cd /home/cobalt/cucumber
 echo "Xvfb display number:"
 echo $DISPLAY
+echo "Installing/updating gems in case of changes..."
+bundle install
+echo "Running cucumber..."
 # bundle exec parallel_cucumber features/ -o "-p html_each"
 cucumber -p html_each features/
 ruby results_XML_handler.rb
+erb /home/cobalt/cucumber/cucumber_nginx.conf.erb > /home/cobalt/cucumber/cucumber_nginx.conf
 EOF
 
 ## Copy cucumber html results to the default Nginx content folder

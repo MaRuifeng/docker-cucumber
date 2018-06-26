@@ -2,9 +2,12 @@
 #
 # VERSION 0.1
 # AUTHOR  Ruifeng Ma (ruifengm@sg.ibm.com)
+# CREATED 2016-Jun-16
+# LAST MODIFIED 2017-Apr-24
 
-# This file creates a container of ubuntu nature that runs 
-# Xvfb, X11vnc, SSH, NGINX, Firefox and Ruby services.
+# This file creates a docker image of ubuntu nature that runs
+# Xvfb, X11vnc, SSH, NGINX, Firefox and Ruby services. It serves as a base image
+# for cucumber test execution.
 #
 # SSH is used to provide encrypted and remote data
 # communication between the docker container and client machines.
@@ -14,6 +17,10 @@
 # X11vnc creates a VNC session against the virtual display that can be accessed through a VNC viewer remotely.
 #
 # NGINX is used to serve the static contents of the cucumber test results through HTTP.
+#
+# NOTE: if the image built from this Dockerfile needs to be used by Dockerfile.exec, the ENV statements
+#       should be removed as the environment variables persist in docker images.
+
 
 
 FROM ubuntu:14.04
@@ -72,6 +79,7 @@ RUN apt-get -y install \
     policykit-1 sound-theme-freedesktop systemd-services systemd-shim x11-common \
     xul-ext-ubufox && \
     apt-get clean -y
+# ADD firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb /
 RUN wget sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     dpkg -i firefox-mozilla-build_46.0.1-0ubuntu1_amd64.deb && \
     apt-mark hold firefox && \
@@ -105,5 +113,19 @@ EXPOSE 80
 # Create user, install ruby and required gems
 RUN ["/bin/bash", "/src/setup.sh"]
 
-# Start Xvfb, x11vnc, ssh services and run cucumber
-CMD ["/bin/bash", "/src/startup.sh"]
+# Pass application build name as a docker build argument
+ARG APP_BUILD
+ARG TEST_PHASE
+
+# Check if the build argument has been set
+RUN if [ -z "$APP_BUILD" ]; then echo "APP_BUILD not set - ERROR"; exit 1; else : ; fi
+RUN if [ -z "$TEST_PHASE" ]; then echo "TEST_PHASE not set - ERROR"; exit 1; else : ; fi
+
+# Transfer args as env vars
+ENV APP_BUILD ${APP_BUILD}
+ENV TEST_PHASE ${TEST_PHASE}
+
+# Start Xvfb, x11vnc, ssh services and run cucumber (using CMD shell form to parse the env vars)
+# CMD ["/bin/bash", "/src/startup.sh", "$APP_BUILD", "$TEST_PHASE"]
+# CMD /bin/bash
+CMD /bin/bash /src/startup.sh $APP_BUILD $TEST_PHASE
