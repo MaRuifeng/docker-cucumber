@@ -2,11 +2,6 @@
 
 Description
 ---------------
-This branch takes 2 input build arguments to be supplied for reporting URLs. The reporting directory is structured by these two arguments. 
-
-APP_BUILD
-
-TEST_PHASE
 
 This repository contains a Dockerfile that creates a docker container which runs Xvfb, X11VNC, SSH, NGINX, Firefox and Ruby services. 
 Cucumber GUI tests can be run inside the container with test reports exposed through NGINX static web service. 
@@ -35,7 +30,7 @@ A Linux system (or any other OS that works for you) with docker installed.
 
 Usage
 -----
-Clone the repository to your git folder, build the docker image and run it. 
+Clone the repository to your git folder, build the docker image and run it. The APP_BUILD and TEST_PHASE environment variables are used to construct reporting URLs. 
 
     docker build -t cucumber -f Dockerfile.setup --build-arg APP_BUILD=build --build-arg TEST_PHASE=bvt .
     CONTAINER_ID=$(docker run -d -P -p 9080:80 cucumber)
