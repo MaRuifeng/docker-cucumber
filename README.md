@@ -1,16 +1,18 @@
 # docker-cucumber
+## Description
 
-Description
----------------
+Cucumber is a popular test automation tool that supports Behavior Driven Development(BDD). It's been largely adopted for automated GUI test in CI/CD pipelines. It uses its unique DSL (the Gherkin language) to write executable test specifications in plain text and validates whether a piece of software works as specified. More detailed introductions and tutorials can be found on its [documentation page](https://docs.cucumber.io/guides/overview/). 
+
+For GUI tests, internally cucumber runs on the Selenium webdriver and often it's found not easy to properly configure a cucumber running environment, and the environment itself is fragile with dependency changes. This is particularly true when trying to make Slenium works with the FireFox browser. Version compatibility is a little devil poking around. Hence an idea occurs to me that such configurations can be managed within a docker container, such that package dependencies, Ruby gem versions and browser versions can be persisted. A container also provides an isolated test running environment that is immune to changes at host level. 
 
 This repository contains a Dockerfile that creates a docker container which runs Xvfb, X11VNC, SSH, NGINX, Firefox and Ruby services. 
 Cucumber GUI tests can be run inside the container with test reports exposed through NGINX static web service. 
 
-* SSH is used to provide encrypted and remote data communication between the docker container and client machines.
+* SSH is used to provide encrypted data communication between the docker container and remote client machines.
 
 * Xvfb creates a virtual display where GUI tests can be run.
 
-* X11vnc creates a VNC session against the virtual display that can be accessed through a VNC viewer remotely.
+* X11vnc creates a VNC session against the virtual display that can be accessed through a VNC viewer remotely (add-on, not compulsory)
 
 * NGINX is used to serve the static contents of the cucumber test results through HTTP.
 
@@ -18,19 +20,11 @@ Cucumber GUI tests can be run inside the container with test reports exposed thr
 
 * An XSLT file junit-noframes.xsl was written to compile the JUnit XML reports into a consolidated HTML report. 
 
-Owners
-------
-Author: Ruifeng Ma
-
-Organization: IBM
-
-Requirements
-------------
+## Requirements
 A Linux system (or any other OS that works for you) with docker installed.
 
-Usage
------
-Clone the repository to your git folder, build the docker image and run it. The APP_BUILD and TEST_PHASE environment variables are used to construct reporting URLs. 
+## Getting Started
+Clone the repository, build the docker image and run it. The APP_BUILD and TEST_PHASE environment variables are used to construct reporting URLs. 
 
     docker build -t cucumber -f Dockerfile.setup --build-arg APP_BUILD=build --build-arg TEST_PHASE=bvt .
     CONTAINER_ID=$(docker run -d -P -p 9080:80 cucumber)
@@ -56,8 +50,7 @@ Once the cucumber scripts are finished with running, view the test results repor
     http://<docker_host_ip>:9080
 
 
-Contributing
-------------
+## Contributing
 Contact the owner before contributing.
 
 1. Fork the repository on Github
@@ -67,7 +60,6 @@ Contact the owner before contributing.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Authors
--------------------
-Authors: ruifengm@sg.ibm.com mrfflyer@gmail.com
+## License and Authors
+* Ruifeng Ma (mrfflyer@gmail.com)
 
